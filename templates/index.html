@@ -3,20 +3,23 @@
 
 <head>
     <link type="text/css" rel="stylesheet" href="{{ url_for("static", filename="styles.css") }}"/>
-    <title>Flask-App-Skeleton</title>
+    <link type="image/x-icon" rel="icon" href="{{ url_for("static", filename="favicon.ico") }}">
+    <title>GVSU Sports-Analytics</title>
 </head>
 
 <div>
-    <h1 class="title">Current Time</h1>
+    <nav class="topnav sticky_nav">
+        <a href="/">Home</a>
+        <a href="/pitchers">Pitcher Analysis</a>
+        <a href="/hitters">Hitter Analysis</a>
+    </nav>
+</div>
+
+<div>
+    <h1 class="title">GVSU Sports Analytics Club</h1>
 </div>
 
 <body>
-<address class="centered"><p>{{ date }}<br>
-</address>
-
-<a class="button" href="/home">
-    <button>Home Page</button>
-</a>
 </body>
 
 </html>

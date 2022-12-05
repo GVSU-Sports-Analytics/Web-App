@@ -1,37 +1,34 @@
-/*Button class*/
-.button {
-    background-color: #395963;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-
-html {
-    background-color: black;
-}
-
-p {
-    color: white;
-}
 
 .title {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: darkcyan;
+    font-size: 400%;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 6%;
 }
 
+.topnav {
+    background-color: #141d57;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
 
-.centered {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+.topnav a {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 15px 18px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+    background-color: #e0c30a;
+    color: black;
+}
+
+.topnav a.active {
+    color: #323232;
 }

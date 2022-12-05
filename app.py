@@ -1,6 +1,9 @@
 from flask import Flask, render_template
-from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
+import sqlite3
 import os
+
+db = SQLAlchemy()
 
 app = Flask(
     __name__,
@@ -8,19 +11,15 @@ app = Flask(
     static_folder="static"
 )
 
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///sports.db"
+
+db.init_app(app)
+
 
 @app.route("/")
 def index() -> str:
     return render_template(
         "index.html",
-        date=datetime.now()
-    )
-
-
-@app.route("/home")
-def home() -> str:
-    return render_template(
-        "home.html",
     )
 
 
@@ -30,3 +29,5 @@ if __name__ == "__main__":
         debug=True,
         port=int(os.environ.get("PORT", 3000))
     )
+
+    # sqlite3.connect("data/sports.db")
