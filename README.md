@@ -1,5 +1,4 @@
-# Flask-Skeleton
-Flask web app skeleton
+# GVSU sports analytics web app
 
 ### Run Locally
 1. pip3 install -r requirements.txt <br>
