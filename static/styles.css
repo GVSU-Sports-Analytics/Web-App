@@ -1,4 +1,9 @@
 
+.home_page {
+    background: url("assets/louie.gif");
+}
+
+
 .title {
     font-size: 400%;
     font-weight: bold;
@@ -7,7 +12,7 @@
 }
 
 .topnav {
-    background-color: #141d57;
+    background-color: #0033A0;
     overflow: hidden;
     position: fixed;
     top: 0;
@@ -25,7 +30,7 @@
 }
 
 .topnav a:hover {
-    background-color: #e0c30a;
+    background-color: #0033A0;
     color: black;
 }
 

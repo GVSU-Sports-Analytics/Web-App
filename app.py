@@ -1,6 +1,5 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
-import sqlite3
 import os
 
 db = SQLAlchemy()
