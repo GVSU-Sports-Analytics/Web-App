@@ -1,5 +1,8 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
+from blueprints.login import login
+from blueprints.about import about
+from blueprints.simulator import simulator
 import os
 
 app = Flask(
@@ -9,6 +12,7 @@ app = Flask(
 )
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
+app.register_blueprint(login), app.register_blueprint(about), app.register_blueprint(simulator)
 
 db = SQLAlchemy()
 db.init_app(app)
@@ -18,20 +22,6 @@ db.init_app(app)
 def index() -> str:
     return render_template(
         "index.html",
-    )
-
-
-@app.route("/simulator")
-def simulator() -> str:
-    return render_template(
-        "simulator.html",
-    )
-
-
-@app.route("/login", methods=["GET", "POST"])
-def login() -> str:
-    return render_template(
-        "login.html",
     )
 
 
