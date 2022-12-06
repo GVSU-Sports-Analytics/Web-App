@@ -2,8 +2,6 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 import os
 
-db = SQLAlchemy()
-
 app = Flask(
     __name__,
     template_folder="templates",
@@ -12,6 +10,7 @@ app = Flask(
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///sports.db"
 
+db = SQLAlchemy()
 db.init_app(app)
 
 
@@ -28,5 +27,3 @@ if __name__ == "__main__":
         debug=True,
         port=int(os.environ.get("PORT", 3000))
     )
-
-    # sqlite3.connect("data/sports.db")
