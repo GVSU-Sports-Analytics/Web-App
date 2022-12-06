@@ -29,7 +29,7 @@ def simulator() -> str:
 
 
 @app.route("/login", methods=["GET", "POST"])
-def login():
+def login() -> str:
     return render_template(
         "login.html",
     )
