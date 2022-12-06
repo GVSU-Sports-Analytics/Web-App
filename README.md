@@ -1,5 +1,11 @@
 # GVSU sports analytics web app
 
 ### Run Locally
-1. pip3 install -r requirements.txt <br>
-2. gunicorn --bind :3000 --workers 1 --threads 8 --timeout 0 app:app
+<br>
+`git clone https://github.com/GVSU-Sports-Analytics/Web-App`
+<br>
+`cd Web-App`
+<br>
+`pip3 install -r requirements.txt`
+<br>
+`python3 app.py`
