@@ -8,7 +8,7 @@ app = Flask(
     static_folder="static"
 )
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///sports.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
 
 db = SQLAlchemy()
 db.init_app(app)
@@ -18,6 +18,13 @@ db.init_app(app)
 def index() -> str:
     return render_template(
         "index.html",
+    )
+
+
+@app.route("/simulator")
+def simulator() -> str:
+    return render_template(
+        "simulator.html",
     )
 
 
