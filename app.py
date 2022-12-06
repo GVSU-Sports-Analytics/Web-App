@@ -11,13 +11,18 @@ app = Flask(
     static_folder="static"
 )
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
-app.register_blueprint(login), app.register_blueprint(about), app.register_blueprint(simulator)
+# register blueprints
+app.register_blueprint(login)
+app.register_blueprint(about)
+app.register_blueprint(simulator)
 
+# configure user database
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
 db = SQLAlchemy()
 db.init_app(app)
 
 
+# home page
 @app.route("/")
 def index() -> str:
     return render_template(
