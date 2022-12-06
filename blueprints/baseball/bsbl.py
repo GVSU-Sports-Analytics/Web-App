@@ -1,14 +1,14 @@
 from flask import Blueprint, render_template
 
-login = Blueprint(
-    "login",
+bsbl = Blueprint(
+    "bsbl",
     __name__,
     template_folder="templates"
 )
 
 
-@login.route("/login", methods=["GET", "POST"])
-def _login() -> str:
+@bsbl.route("/baseball")
+def _baseball() -> str:
     return render_template(
-        "login.html",
+        "baseball.html",
     )
