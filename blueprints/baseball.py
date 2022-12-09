@@ -10,5 +10,6 @@ bsbl = Blueprint(
 @bsbl.route("/baseball")
 def _baseball() -> str:
     return render_template(
-        "baseball.html",
+        "sport.html",
+        sport="GVSU Baseball"
     )

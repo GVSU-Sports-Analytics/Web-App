@@ -1,8 +1,9 @@
 from flask import Flask
 import mysql.connector
 from blueprints.about import about
-from blueprints.baseball.simulator import simulator
-from blueprints.baseball.bsbl import bsbl
+from blueprints.baseball import bsbl
+from blueprints.football import football
+from blueprints.basketball import basketball
 from blueprints.index import index
 import os
 
@@ -17,7 +18,8 @@ def register_blueprints() -> None:
     app.register_blueprint(index)
     app.register_blueprint(about)
     app.register_blueprint(bsbl)
-    app.register_blueprint(simulator)
+    app.register_blueprint(football)
+    app.register_blueprint(basketball)
 
 
 # does not connect from local machine

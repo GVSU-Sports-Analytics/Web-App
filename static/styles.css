@@ -23,6 +23,13 @@ html {
     color: #ffffff;
 }
 
+.page-title {
+    font-size: 600%;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 5%;
+}
+
 .topnav {
     background-color: #0033A0;
     overflow: hidden;
