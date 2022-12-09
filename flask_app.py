@@ -1,3 +1,4 @@
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from blueprints.about import about
@@ -20,17 +21,10 @@ def register_blueprints() -> None:
     app.register_blueprint(simulator)
 
 
-def config_db(db_name: str) -> None:
-    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_name}"
-    db = SQLAlchemy()
-    db.init_app(app)
+#def config_db(db_name: str) -> None:
+#    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_name}"
+#    db = SQLAlchemy()
+#    db.init_app(app)
 
+register_blueprints()
 
-if __name__ == "__main__":
-    register_blueprints()
-    config_db("sports.db")
-    app.run(
-        host="0.0.0.0",
-        debug=True,
-        port=int(os.environ.get("PORT", 3000))
-    )
