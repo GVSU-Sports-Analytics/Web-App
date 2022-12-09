@@ -1,6 +1,5 @@
-
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+import mysql.connector
 from blueprints.about import about
 from blueprints.baseball.simulator import simulator
 from blueprints.baseball.bsbl import bsbl
@@ -21,10 +20,21 @@ def register_blueprints() -> None:
     app.register_blueprint(simulator)
 
 
-#def config_db(db_name: str) -> None:
-#    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_name}"
-#    db = SQLAlchemy()
-#    db.init_app(app)
+# does not connect from local machine
+def config_db() -> mysql.connector.connect:
+    return mysql.connector.connect(
+        host=os.environ.get("DB_HOST"),
+        db=os.environ.get("DB_NAME"),
+        user=os.environ.get("DB_USERNAME"),
+        password=os.environ.get("DB_PASSWORD")
+    )
 
-register_blueprints()
 
+# only if running on local machine
+# comment out in prod
+if __name__ == "__main__":
+    register_blueprints()
+    # con = config_db()
+    app.run(
+        debug=True,
+    )
