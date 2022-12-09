@@ -1,11 +1,12 @@
 from flask import Flask
-import mysql.connector
 from blueprints.about import about
 from blueprints.baseball import bsbl
 from blueprints.football import football
 from blueprints.basketball import basketball
 from blueprints.index import index
-import os
+
+# import os
+# import mysql.connector
 
 app = Flask(
     __name__,
@@ -22,21 +23,10 @@ def register_blueprints() -> None:
     app.register_blueprint(basketball)
 
 
-# does not connect from local machine
-def config_db() -> mysql.connector.connect:
-    return mysql.connector.connect(
-        host=os.environ.get("DB_HOST"),
-        db=os.environ.get("DB_NAME"),
-        user=os.environ.get("DB_USERNAME"),
-        password=os.environ.get("DB_PASSWORD")
-    )
+# need to configure mysql database connection properly still
 
-
-# only if running on local machine
-# comment out in prod
 if __name__ == "__main__":
     register_blueprints()
-    # con = config_db()
     app.run(
         debug=True,
     )
