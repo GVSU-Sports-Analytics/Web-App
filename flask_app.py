@@ -1,6 +1,7 @@
 from flask import Flask
 from blueprints.about import about
 from blueprints.baseball import bsbl
+from blueprints.softball import softball
 from blueprints.football import football
 from blueprints.basketball import basketball
 from blueprints.index import index
@@ -21,6 +22,7 @@ def register_blueprints() -> None:
     app.register_blueprint(bsbl)
     app.register_blueprint(football)
     app.register_blueprint(basketball)
+    app.register_blueprint(softball)
 
 
 # need to configure mysql database connection properly still
