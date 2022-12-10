@@ -39,9 +39,8 @@ def register_blueprints() -> None:
     app.register_blueprint(softball)
 
 
-if __name__ == "__main__":
-    register_blueprints()
-    db = SQLAlchemy(app)
+register_blueprints()
+db = SQLAlchemy(app)
 
-    if 'liveconsole' not in gethostname():
-        app.run(debug=True)
+if 'liveconsole' not in gethostname():
+    app.run(debug=True)
