@@ -9,7 +9,7 @@ basketball = Blueprint(
 
 
 @basketball.route("/basketball")
-def _football() -> render_template:
+def _basketball() -> render_template:
     return render_template(
         "sport.html",
         sport="GVSU Basketball"

@@ -1,13 +1,14 @@
 from flask import Blueprint, render_template
 
-bsbl = Blueprint(
-    "bsbl",
+baseball = Blueprint(
+    "baseball",
     __name__,
+    static_folder="static",
     template_folder="templates"
 )
 
 
-@bsbl.route("/baseball")
+@baseball.route("/baseball")
 def _baseball() -> str:
     return render_template(
         "sport.html",
