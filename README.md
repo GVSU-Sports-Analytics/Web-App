@@ -1,11 +1,7 @@
 # GVSU sports analytics web app
+`http://gvsac.pythonanywhere.com/`
 
 ### Run Locally
-<br>
-`git clone https://github.com/GVSU-Sports-Analytics/Web-App`
-<br>
-`cd Web-App`
-<br>
-`pip3 install -r requirements.txt`
-<br>
-`python3 app.py`
+`git clone https://github.com/GVSU-Sports-Analytics/Web-App` <br>
+`pip3 install -r requirements.txt` <br>
+`python3 flask_app.py` <br>
