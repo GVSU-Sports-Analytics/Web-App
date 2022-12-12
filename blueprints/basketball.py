@@ -12,5 +12,6 @@ basketball = Blueprint(
 def _basketball() -> render_template:
     return render_template(
         "sport.html",
+        in_progress=True,
         sport="GVSU Basketball"
     )

@@ -5,7 +5,6 @@ from blueprints.football import football
 from blueprints.basketball import basketball
 from blueprints.index import index
 from flask_sqlalchemy import SQLAlchemy
-from socket import gethostname
 import os
 
 app = Flask(
@@ -14,33 +13,31 @@ app = Flask(
     static_folder="static"
 )
 
-username = os.getenv("DB_USERNAME")
-password = os.getenv("DB_PASSWORD")
-hostname = os.getenv("DB_HOST")
-databasename = os.getenv("DB_NAME")
 
-SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
-    username=username,
-    password=password,
-    hostname=hostname,
-    databasename=databasename,
+def config_db() -> None:
+    username = os.getenv("DB_USERNAME")
+    password = os.getenv("DB_PASSWORD")
+    hostname = os.getenv("DB_HOST")
+    db_name = os.getenv("DB_NAME")
+    db_uri = f"mysql+mysqlconnector://{username}:{password}@{hostname}/{db_name}"
+    app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
+    app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+
+def register_blueprints(*args) -> None:
+    for bp in args:
+        app.register_blueprint(bp)
+
+
+# python anywhere takes care of app.run()
+register_blueprints(
+    index, baseball,
+    football, basketball,
+    softball
 )
-
-app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
-app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
-
-def register_blueprints() -> None:
-    app.register_blueprint(index)
-    app.register_blueprint(baseball)
-    app.register_blueprint(football)
-    app.register_blueprint(basketball)
-    app.register_blueprint(softball)
-
-
-register_blueprints()
+config_db()
 db = SQLAlchemy(app)
 
-if 'liveconsole' not in gethostname():
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run()
