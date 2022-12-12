@@ -19,13 +19,11 @@
 </div>
 
 <div>
-    <h1 class="page-title">
-        {{ sport }}
-    </h1>
+    <h1 class="page-title">{{ sport }}</h1>
 </div>
 
 {% if in_progress %}
-    <div>
+    <div class="center_img_div">
         <img src="{{ url_for("static", filename="/assets/wip.webp") }}" alt="page in progress">
     </div>
 {% endif %}

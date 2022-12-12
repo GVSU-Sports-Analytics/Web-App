@@ -30,7 +30,6 @@ def register_blueprints(*args) -> None:
         app.register_blueprint(bp)
 
 
-# python anywhere takes care of app.run()
 register_blueprints(
     index, baseball,
     football, basketball,
@@ -39,5 +38,6 @@ register_blueprints(
 config_db()
 db = SQLAlchemy(app)
 
-if __name__ == "__main__":
-    app.run()
+# python anywhere takes care of app.run()
+#if __name__ == "__main__":
+    #app.run(debug=True)
