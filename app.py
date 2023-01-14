@@ -25,23 +25,10 @@ register_blueprints(
 )
 
 
-@app.route("/endpoint", methods=["POST"])
-def post():
-    end_point_roster_data = {
-        "URL": "https://gvsulakers.com",
-        "DB": "n/a"
-    }
-
-    data = json.dumps(end_point_roster_data)
-    res = requests.post(
-        url="http://127.0.0.1:3000/",
-        json=data
-    )
-    print(res.json())
-    return redirect("/")
 
 
 if __name__ == "__main__":
+    #  gunicorn --bind :3000 --workers 1 --threads 8 --timeout 0 app:app
     app.run(
         debug=True,
         host="0.0.0.0"
