@@ -63,3 +63,7 @@ html {
 .topnav a.active {
     color: #323232;
 }
+
+.inputform {
+    padding-top: 10px;
+}
