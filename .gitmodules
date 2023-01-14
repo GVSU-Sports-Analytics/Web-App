@@ -1,0 +1,3 @@
+[submodule "GV-Crawler"]
+	path = GV-Crawler
+	url = https://github.com/GVSU-Sports-Analytics/GV-Crawler
