@@ -8,5 +8,5 @@
 
 ### Setting up Dockerfile
 `sudo docker build -t gvapp .` <br>
-`sudo docker run gvapp` <br>
+`sudo docker run --network="host" gvapp` <br>
 
