@@ -2,9 +2,11 @@ import requests
 import json
 from flask import (
     Blueprint,
-    redirect,
     render_template
 )
+
+from datetime import datetime
+import pytz
 
 index = Blueprint(
     "index",
@@ -20,7 +22,13 @@ def check_update():
     time to call the GV-Crawler API or not
     :return:
     """
-    return True
+
+    # check the current time with the most
+    # recent update in the database (that we dont have yet)
+    # and if it has been 24 hours, update the data, and log
+    # the most recent update to be the current eastern time
+    etc = pytz.timezone("US/Eastern")
+    time = datetime.now(etc)
 
 
 def update():
