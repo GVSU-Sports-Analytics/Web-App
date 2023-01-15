@@ -20,7 +20,7 @@ def check_update():
     time to call the GV-Crawler API or not
     :return:
     """
-    return False
+    return True
 
 
 def update():
@@ -39,11 +39,11 @@ def update():
     data = json.dumps(end_point_roster_data)
     res = requests.post(
         # eventually this will be the actual url of the api endpoint
-        url="http://127.0.0.1:3000/",
+        url="http://0.0.0.0:3000/",
         json=data
     )
-
-    return redirect("/")
+    print(res.json())
+    return "sent request to api"
 
 
 @index.route("/")

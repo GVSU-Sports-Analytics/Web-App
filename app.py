@@ -23,6 +23,7 @@ register_blueprints(
 )
 
 if __name__ == "__main__":
+    # to run the app in the terminal with gunicorn
     #  gunicorn --bind :3000 --workers 1 --threads 8 --timeout 0 app:app
     app.run(
         debug=True,
