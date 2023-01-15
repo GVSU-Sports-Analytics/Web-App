@@ -28,9 +28,12 @@
     </div>
 {% endif %}
 
+
+
 {%  for player, info in data.items() %}
     <div>
-    <h3>Name: {{ player }}</h3>
+    <h3>Name: # {{ info["number"] }} {{ player }}</h3>
+        <img src="{{ info["image"] }}" alt="{{ player }}">
     <ul>
         <li>Position: {{ info["pos"] }}</li>
         <li>Height: {{ info["height"] }}</li>
