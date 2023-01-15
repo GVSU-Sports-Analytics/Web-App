@@ -1,9 +1,9 @@
 from flask import Flask
 
 from blueprints.baseball import baseball
-from blueprints.softball import softball
-from blueprints.football import football
-from blueprints.basketball import basketball
+# from blueprints.softball import softball
+# from blueprints.football import football
+# from blueprints.basketball import basketball
 from blueprints.index import index
 from register import register_blueprints
 
@@ -16,9 +16,9 @@ app = Flask(
 register_blueprints(
     index,
     baseball,
-    football,
-    basketball,
-    softball,
+    # football,
+    # basketball,
+    # softball,
     app=app,
 )
 
