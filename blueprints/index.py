@@ -5,8 +5,6 @@ from flask import (
     render_template
 )
 
-from datetime import datetime
-import pytz
 
 index = Blueprint(
     "index",
@@ -16,21 +14,9 @@ index = Blueprint(
 )
 
 
-def check_update():
-    """
-    Condition to determine if it is
-    time to call the GV-Crawler API or not
-    :return:
-    """
-
-    # check the current time with the most
-    # recent update in the database (that we dont have yet)
-    # and if it has been 24 hours, update the data, and log
-    # the most recent update to be the current eastern time
-    etc = pytz.timezone("US/Eastern")
-    time = datetime.now(etc)
-
-
+# we are moving this logic out of the web app logic
+# and into a process that will run once every 24 hours.
+# calling the api directly from the app is not a great idea
 def update():
     """
     Sends a request to scrape new data from the
@@ -61,11 +47,6 @@ def _index() -> str:
     will send a post request to our GV-Crawler API
     :return: Serves the home page
     """
-
-    # might be an issue because this is run every time a user refreshes
-    if check_update():
-        data = update()
-        print(data.keys())
 
     return render_template(
         "index.html",

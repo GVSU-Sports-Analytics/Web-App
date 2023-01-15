@@ -1,3 +1,6 @@
 [submodule "GV-Crawler"]
 	path = GV-Crawler
 	url = https://github.com/GVSU-Sports-Analytics/GV-Crawler
+[submodule "Sidearm-Updater"]
+	path = Sidearm-Updater
+	url = git@github.com:GVSU-Sports-Analytics/Sidearm-Updater.git
