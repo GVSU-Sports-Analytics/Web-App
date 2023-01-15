@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+    <link type="text/css" rel="stylesheet" href="{{ url_for("static", filename="styles.css") }}"/>
+    <link type="image/x-icon" rel="icon" href="{{ url_for("static", filename="favicon.ico") }}">
+    <title>GVSU {{ sport }}-{{ year }}</title>
+</head>
+
+<body>
+<div>
+    <nav class="topnav">
+        <a href="/">Home</a>
+        <a href="/baseball">Baseball</a>
+        <a href="https://gvsu.campuslabs.com/engage/organization/baseballanalytics">About</a>
+        <a href="https://github.com/GVSU-Sports-Analytics">GitHub</a>
+    </nav>
+</div>
+
+<div>
+    <h1 class="page-title">{{ year + " " + sport }}</h1>
+</div>
+
+<div>
+    {% for player, info in data.items() %}
+        <a href="{{ url_for('baseball._player', year=year, player_name=player) }}">
+            <img src="{{ info["image"] }}" alt="{{ player }}{{ info["number"] }}">
+        </a>
+    {% endfor %}
+</div>
+
+</body>
+</html>

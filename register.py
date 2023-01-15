@@ -1,16 +1,20 @@
 from flask import Flask
 import os
 
+import pymysql
 
-def config_db(app: Flask) -> None:
-    username = os.getenv("DB_USERNAME")
-    password = os.getenv("DB_PASSWORD")
-    hostname = os.getenv("DB_HOST")
-    db_name = os.getenv("DB_NAME")
-    db_uri = f"mysql+mysqlconnector://{username}:{password}@{hostname}/{db_name}"
-    app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
-    app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+def config_db():
+    user_name = os.environ["GVAPP_USERNAME"]
+    password = os.environ["GVAPP_PASSWORD"]
+    host = os.environ["GVAPP_HOST"]
+
+    db = pymysql.connect(
+        host=host,
+        user=user_name,
+        password=password
+    )
+    return db
 
 
 def register_blueprints(*args, app: Flask) -> None:

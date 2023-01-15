@@ -47,7 +47,6 @@ def _index() -> str:
     will send a post request to our GV-Crawler API
     :return: Serves the home page
     """
-
     return render_template(
         "index.html",
     )

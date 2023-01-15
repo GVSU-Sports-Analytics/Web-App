@@ -10,9 +10,9 @@
     <nav class="topnav">
         <a href="/">Home</a>
         <a href="/baseball">Baseball</a>
-{#        <a href="/softball">Softball</a>#}
-{#        <a href="/football">Football</a>#}
-{#        <a href="/basketball">Basketball</a>#}
+        {#        <a href="/softball">Softball</a>#}
+        {#        <a href="/football">Football</a>#}
+        {#        <a href="/basketball">Basketball</a>#}
         <a href="https://gvsu.campuslabs.com/engage/organization/baseballanalytics">About</a>
         <a href="https://github.com/GVSU-Sports-Analytics">GitHub</a>
     </nav>
@@ -22,24 +22,28 @@
     <h1 class="page-title">{{ sport }}</h1>
 </div>
 
-{% if in_progress %}
-    <div class="center_img_div">
-        <img src="{{ url_for("static", filename="/assets/wip.webp") }}" alt="page in progress">
-    </div>
-{% endif %}
+
+<table>
+    {% for year in data %}
+        <tr>
+            <td>
+                <a href="{{ url_for('baseball._year', year=year, d=year[year]) }}">{{ year }}</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
 
 
-
-{%  for player, info in data.items() %}
-    <div>
-    <h3>Name: # {{ info["number"] }} {{ player }}</h3>
-        <img src="{{ info["image"] }}" alt="{{ player }}">
-    <ul>
-        <li>Position: {{ info["pos"] }}</li>
-        <li>Height: {{ info["height"] }}</li>
-        <li>Weight: {{ info["weight"] }}</li>
-    </ul>
-    </div>
-{% endfor %}
+{#{% for player, info in data.items() %}#}
+{#    <div>#}
+{#        <h3>Name: # {{ info["number"] }} {{ player }}</h3>#}
+{#        <a href="{{ url_for('baseball._player', player_name=player, info=info) }}"><img src="{{ info["image"] }}" alt="{{ player }} sidearm roster image"></a>#}
+{#        <ul>#}
+{#            <li>Position: {{ info["pos"] }}</li>#}
+{#            <li>Height: {{ info["height"] }}</li>#}
+{#            <li>Weight: {{ info["weight"] }}</li>#}
+{#        </ul>#}
+{#    </div>#}
+{#{% endfor %}#}
 
 </html>
