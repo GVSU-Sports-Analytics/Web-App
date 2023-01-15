@@ -42,8 +42,7 @@ def update():
         url="http://0.0.0.0:3000/",
         json=data
     )
-    print(res.json())
-    return "sent request to api"
+    return res.json()
 
 
 @index.route("/")
@@ -55,8 +54,10 @@ def _index() -> str:
     :return: Serves the home page
     """
 
+    # might be an issue because this is run every time a user refreshes
     if check_update():
-        update()
+        data = update()
+        print(data.keys())
 
     return render_template(
         "index.html",
