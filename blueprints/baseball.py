@@ -1,11 +1,6 @@
 from flask import Blueprint, render_template, request
-
 from register import config_db
-import pandas as pd
-
-# for development only
-# this update logic will be moved to the sidearm updater repo
-from blueprints.index import update
+from db import table_names
 
 baseball = Blueprint(
     "baseball",
@@ -23,12 +18,11 @@ def _baseball() -> str:
     # until we get a database
     db = config_db()
     cur = db.cursor()
-    rows = cur.execute("SELECT name FROM sqlite_master WHERE type='table';")
-    print(rows)
+    tables = table_names(cur, "baseball")
     return render_template(
         "sport.html",
         sport="GVSU Baseball",
-        data=rows
+        data=tables
     )
 
 
