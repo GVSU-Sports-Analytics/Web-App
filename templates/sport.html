@@ -27,7 +27,7 @@
     {% for year in data %}
         <tr>
             <td>
-                <a href="{{ url_for('baseball._year', year=year, d=year[year]) }}">{{ year }}</a>
+                <a href="{{ url_for('baseball._year', year=year.split('_')[-1]) }}">{{ year }}</a>
             </td>
         </tr>
     {% endfor %}

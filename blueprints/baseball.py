@@ -1,6 +1,6 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template
 from register import config_db
-from db import table_names
+from db import table_names, query, column_names
 
 baseball = Blueprint(
     "baseball",
@@ -19,6 +19,7 @@ def _baseball() -> str:
     db = config_db()
     cur = db.cursor()
     tables = table_names(cur, "baseball")
+    cur.close(), db.close()
     return render_template(
         "sport.html",
         sport="GVSU Baseball",
@@ -32,7 +33,11 @@ def _year(year):
     :param year:
     :return:
     """
-    data = update()[year]
+    db = config_db()
+    cur = db.cursor()
+    data = query(cur, f"SELECT * FROM baseball_roster_{year};")
+    cols = column_names(cur, f"baseball_roster_{year}")
+    print(cols)
     return render_template(
         "year.html",
         sport="Baseball",
@@ -43,7 +48,6 @@ def _year(year):
 
 @baseball.route("/baseball/<year>/<player_name>")
 def _player(year, player_name) -> str:
-    data = update()[year][player_name]
     return render_template(
         "player.html",
         sport="Baseball",

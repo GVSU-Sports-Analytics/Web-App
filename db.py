@@ -1,7 +1,7 @@
 import sqlite3
 
 
-def de_tuple(l: list[tuple]):
+def de_tuple(l):
     things = []
     for t in l:
         for i in t:
@@ -15,3 +15,17 @@ def table_names(cursor: sqlite3.Cursor, filt: str) -> list[str]:
     )
     tables = de_tuple(tables.fetchall())
     return [tbl for tbl in tables if filt in tbl]
+
+
+def column_names(cursor: sqlite3.Cursor, tbl_name: str):
+    r = cursor.execute(f"SELECT * FROM {tbl_name};")
+    return de_tuple(r.description)
+
+
+def query(cursor: sqlite3.Cursor, qstring: str):
+    r = cursor.execute(qstring)
+    return r.fetchall()
+
+
+def map_cols2rows(cols: list[str], rows: list[tuple]) -> dict:
+    return
