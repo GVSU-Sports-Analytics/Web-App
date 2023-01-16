@@ -1,11 +1,8 @@
 from flask import Flask
 
 from blueprints.baseball import baseball
-# from blueprints.softball import softball
-# from blueprints.football import football
-# from blueprints.basketball import basketball
 from blueprints.index import index
-from register import register_blueprints
+from register import register_blueprints, config_db
 
 app = Flask(
     __name__,
@@ -16,14 +13,11 @@ app = Flask(
 register_blueprints(
     index,
     baseball,
-    # football,
-    # basketball,
-    # softball,
     app=app,
 )
 
+
 if __name__ == "__main__":
-    # to run the app in the terminal with gunicorn
     #  gunicorn --bind :3000 --workers 1 --threads 8 --timeout 0 app:app
     app.run(
         debug=True,
