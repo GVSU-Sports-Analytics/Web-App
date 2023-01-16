@@ -1,24 +1,22 @@
-from flask import Flask
-
-from blueprints.baseball import baseball
 from blueprints.index import index
-from register import register_blueprints, config_db
+from blueprints.baseball import baseball
+from db import config_db
+from application.flask_app import App
 
-app = Flask(
-    __name__,
-    template_folder="templates",
-    static_folder="static"
-)
-
-register_blueprints(
-    index,
-    baseball,
-    app=app,
-)
-
+db = config_db()
+cur = db.cursor()
 
 if __name__ == "__main__":
-    app.run(
-        debug=True,
-        port=8080,
+    app = App(
+        name=__name__,
+        port=3000,
+        template_path="templates",
+        static_path="static",
+        _db=db,
+        _cursor=cur,
     )
+    app.add_blueprints(
+        index,
+        baseball
+    )
+    app.run()

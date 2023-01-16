@@ -16,9 +16,6 @@ class App:
     _blueprints: list[Blueprint] = field(
         default_factory=lambda: []
     )
-    _app: Flask = field(
-        default_factory=lambda: Flask(__name__)
-    )
 
     @property
     def Name(self) -> str:
@@ -36,21 +33,28 @@ class App:
     def Cursor(self):
         return self._cursor
 
-    @property
-    def App(self):
-        return self._app
-
     def add_blueprints(self, *blueprints):
         for bp in blueprints:
             self._blueprints.append(bp)
 
-    def config(self):
+    def config_blueprints(self, app: Flask):
+        """
+        Creates a Flask instance and
+        then registers the blueprints to
+        that specific instance
+        """
         for bp in self._blueprints:
-            self._app.register_blueprint(bp)
+            app.register_blueprint(bp)
 
     def run(self):
-        self.config()
-        self._app.run(
+        app = Flask(
+            self.Name,
+            static_folder=self.static_path,
+            template_folder=self.template_path
+        )
+        print(__name__)
+        self.config_blueprints(app)
+        app.run(
             debug=True,
             port=self.port
         )

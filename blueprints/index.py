@@ -14,9 +14,9 @@ index = Blueprint(
 )
 
 
-# we are moving this logic out of the web app logic
+# we are moving this logic out of the web application logic
 # and into a process that will run once every 24 hours.
-# calling the api directly from the app is not a great idea
+# calling the api directly from the application is not a great idea
 def update():
     """
     Sends a request to scrape new data from the
