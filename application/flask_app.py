@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from flask import Flask, Blueprint
+from application.flask_blueprint import Page
+from flask import Flask
 import sqlite3
 
 
@@ -13,7 +14,7 @@ class App:
     _db: sqlite3
     _cursor: sqlite3.Cursor
 
-    _blueprints: list[Blueprint] = field(
+    _pages: list[Page] = field(
         default_factory=lambda: []
     )
 
@@ -33,9 +34,9 @@ class App:
     def Cursor(self):
         return self._cursor
 
-    def add_blueprints(self, *blueprints):
+    def add_blueprints(self, *blueprints: Page):
         for bp in blueprints:
-            self._blueprints.append(bp)
+            self._pages.append(bp)
 
     def config_blueprints(self, app: Flask):
         """
@@ -43,8 +44,8 @@ class App:
         then registers the blueprints to
         that specific instance
         """
-        for bp in self._blueprints:
-            app.register_blueprint(bp)
+        for bp in self._pages:
+            app.register_blueprint(bp.View)
 
     def run(self):
         app = Flask(
@@ -52,7 +53,6 @@ class App:
             static_folder=self.static_path,
             template_folder=self.template_path
         )
-        print(__name__)
         self.config_blueprints(app)
         app.run(
             debug=True,
