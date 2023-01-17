@@ -5,7 +5,7 @@ def config_db():
     # while we are testing with the
     # sqlite3 db, you must have the Sidearm-Updater
     # repo installed alongside the Web-App in same dir
-    path = "/home/jensen/Documents/projects/gvsu-app/Sidearm-Updater/data/gvsac.db"
+    path = "/Users/jensen/Documents/projects/Sidearm-Updater/data/gvsac.db"
     return sqlite3.connect(
         path,
         check_same_thread=False,

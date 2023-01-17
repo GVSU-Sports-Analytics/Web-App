@@ -17,7 +17,6 @@ def sport_page(sport_name) -> str:
         sport.Cursor,
         sport_name.lower(),
     )
-    print(tables)
     tables = [tbl.split("_")[-1] for tbl in tables]
     return render_template(
         "sport.html",
@@ -30,7 +29,7 @@ def sport_page(sport_name) -> str:
 def year_page(sport_name, year) -> str:
     players = query(
         sport.Cursor,
-        f"""SELECT * FROM {sport_name.lower()}__{year};"""
+        f"""SELECT image FROM {sport_name.lower()}_{year};"""
     )
     return render_template(
         "year.html",
