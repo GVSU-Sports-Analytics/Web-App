@@ -9,7 +9,10 @@ def config_db():
     in the GV-Crawler repo
     :return:
     """
-    db = sqlite3.connect("/home/jensen/Documents/projects/gvsu-app/GV-Crawler/data/gvsac.db")
+    db = sqlite3.connect(
+        "/home/jensen/Documents/projects/gvsu-app/GV-Crawler/data/gvsac.db",
+        check_same_thread=False,
+    )
     return db
 
 

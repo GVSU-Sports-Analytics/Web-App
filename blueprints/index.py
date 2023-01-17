@@ -1,20 +1,13 @@
 import requests
 import json
 from flask import render_template
-from application.flask_blueprint import Page
-from db import config_db
-
-db = config_db()
-cur = db.cursor()
-
+from framework.flask_blueprint import Page
 
 index = Page(
     name="index",
     import_name=__name__,
     static_path="static",
     template_path="templates",
-    db=db,
-    cur=cur,
 )
 
 
@@ -31,7 +24,8 @@ def update():
         url="http://0.0.0.0:3000/",
         json=data
     )
-    return res.json(cur=db.cursor())
+    # this got changed somehow
+    return res.json()
 
 
 @index.View.route("/")

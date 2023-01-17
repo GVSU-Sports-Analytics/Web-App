@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from application.flask_blueprint import Page
+from framework.flask_blueprint import Page
 from flask import Flask
 import sqlite3
 
@@ -39,13 +39,9 @@ class App:
             self._pages.append(bp)
 
     def config_blueprints(self, app: Flask):
-        """
-        Creates a Flask instance and
-        then registers the blueprints to
-        that specific instance
-        """
-        for bp in self._pages:
-            app.register_blueprint(bp.View)
+        for page in self._pages:
+            page.configure_database(self.Database)
+            app.register_blueprint(page.View)
 
     def run(self):
         app = Flask(
@@ -53,10 +49,13 @@ class App:
             static_folder=self.static_path,
             template_folder=self.template_path
         )
+
         self.config_blueprints(app)
+
         app.run(
             debug=True,
             port=self.port
         )
-        self.Database.close()
+
         self.Cursor.close()
+        self.Database.close()

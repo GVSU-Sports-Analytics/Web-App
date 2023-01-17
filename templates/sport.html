@@ -5,45 +5,30 @@
     <link type="image/x-icon" rel="icon" href="{{ url_for("static", filename="favicon.ico") }}">
     <title>GVSU Sports-Analytics</title>
 </head>
+<body>
 
 <div>
     <nav class="topnav">
         <a href="/">Home</a>
-        <a href="/baseball">Baseball</a>
-        {#        <a href="/softball">Softball</a>#}
-        {#        <a href="/football">Football</a>#}
-        {#        <a href="/basketball">Basketball</a>#}
+        <a href="{{ url_for('sport.sport_page', sport_name='Baseball') }}">Baseball</a>
         <a href="https://gvsu.campuslabs.com/engage/organization/baseballanalytics">About</a>
         <a href="https://github.com/GVSU-Sports-Analytics">GitHub</a>
     </nav>
 </div>
 
 <div>
-    <h1 class="page-title">{{ sport }}</h1>
+    <h1 class="page-title">{{ sport_name }}</h1>
 </div>
-
 
 <table>
     {% for year in data %}
         <tr>
             <td>
-                <a href="{{ url_for('baseball._year', year=year.split('_')[-1]) }}">{{ year }}</a>
+                <a href="{{ url_for('sport.year_page', year=year, sport_name=sport_name) }}">{{ year }}</a>
             </td>
         </tr>
     {% endfor %}
 </table>
 
-
-{#{% for player, info in data.items() %}#}
-{#    <div>#}
-{#        <h3>Name: # {{ info["number"] }} {{ player }}</h3>#}
-{#        <a href="{{ url_for('baseball._player', player_name=player, info=info) }}"><img src="{{ info["image"] }}" alt="{{ player }} sidearm roster image"></a>#}
-{#        <ul>#}
-{#            <li>Position: {{ info["pos"] }}</li>#}
-{#            <li>Height: {{ info["height"] }}</li>#}
-{#            <li>Weight: {{ info["weight"] }}</li>#}
-{#        </ul>#}
-{#    </div>#}
-{#{% endfor %}#}
-
+</body>
 </html>

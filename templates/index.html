@@ -10,10 +10,7 @@
 <div>
     <nav class="topnav">
         <a href="/">Home</a>
-        <a href="/baseball">Baseball</a>
-{#        <a href="/softball">Softball</a>#}
-{#        <a href="/football">Football</a>#}
-{#        <a href="/basketball">Basketball</a>#}
+        <a href="{{ url_for('sport.sport_page', sport_name='Baseball') }}">Baseball</a>
         <a href="https://gvsu.campuslabs.com/engage/organization/baseballanalytics">About</a>
         <a href="https://github.com/GVSU-Sports-Analytics">GitHub</a>
     </nav>

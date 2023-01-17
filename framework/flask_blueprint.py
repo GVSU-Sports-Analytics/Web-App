@@ -3,13 +3,11 @@ import sqlite3
 
 
 class Page:
-    def __init__(self, name, import_name, static_path, template_path, db, cur):
+    def __init__(self, name, import_name, static_path, template_path):
         self.name: str = name
         self.import_name: str = import_name
         self.static_path: str = static_path
         self.template_path: str = template_path
-        self.db: sqlite3 = db
-        self.cur: sqlite3.Cursor = cur
 
         self.Assert()
         self._blueprint = Blueprint(
@@ -23,11 +21,13 @@ class Page:
         assert (isinstance(self.Name, str))
         assert (isinstance(self.Static, str))
         assert (isinstance(self.Template, str))
-        assert (isinstance(self.Database, sqlite3.Connection))
-        assert (isinstance(self.Cursor, sqlite3.Cursor))
 
     def __str__(self):
         return f"Flask page named \"{self.Name}\" defined @ \"{self.ImportName}\""
+
+    def configure_database(self, db: sqlite3):
+        self.db = db
+        self.cur = db.cursor()
 
     @property
     def Name(self) -> str:
@@ -47,10 +47,12 @@ class Page:
 
     @property
     def Database(self) -> sqlite3:
+        assert self.db
         return self.db
 
     @property
     def Cursor(self) -> sqlite3.Cursor:
+        assert self.cur
         return self.cur
 
     @property
