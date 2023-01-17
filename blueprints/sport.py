@@ -1,6 +1,6 @@
 from flask import render_template
 from framework.flask_blueprint import Page
-from db import query, table_names, de_tuple
+from db import query, table_names, de_tuple, unique_sports
 
 
 sport = Page(
@@ -18,10 +18,12 @@ def sport_page(sport_name) -> str:
         sport_name.lower(),
     )
     years = [tbl.split("_")[-1] for tbl in tables]
+    sports = unique_sports(sport.Cursor)
     return render_template(
         "sport.html",
         sport_name=sport_name,
         data=years,
+        sports=sports
     )
 
 
@@ -31,28 +33,34 @@ def year_page(sport_name, year) -> str:
         sport.Cursor,
         f"""SELECT player_name, image FROM {sport_name.lower()}_{year};"""
     )
+    sports = unique_sports(sport.Cursor)
     return render_template(
         "year.html",
         sport_name=sport_name,
         year=year,
         data=players,
+        sports=sports
     )
 
 
 @sport.View.route("/<sport_name>/<player_name>")
 def player_page(sport_name, player_name) -> str:
+    sports = unique_sports(sport.Cursor)
     return render_template(
         "player.html",
         sport_name=sport_name,
         player_name=player_name,
+        sports=sports
     )
 
 
 @sport.View.route("/<sport_name>/<player_name>/<year>")
 def player_year_page(sport_name, player_name, year) -> str:
+    sports = unique_sports(sport.Cursor)
     return render_template(
         "player.html",
         sport_name=sport_name,
         player_name=player_name,
         year=year,
+        sports=sports,
     )

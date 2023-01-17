@@ -5,7 +5,7 @@ def config_db():
     # while we are testing with the
     # sqlite3 db, you must have the Sidearm-Updater
     # repo installed alongside the Web-App in same dir
-    path = "/home/jensen/Documents/projects/gvsu-app/Sidearm-Updater/data/gvsac.db"
+    path = "/Users/jensen/Documents/projects/sports-analytics-club/Sidearm-Updater/data/gvsac.db"
     return sqlite3.connect(
         path,
         check_same_thread=False,
@@ -30,7 +30,7 @@ def table_names(cursor: sqlite3.Cursor, filt: str) -> list[str]:
 
 def column_names(cursor: sqlite3.Cursor, tbl_name: str):
     r = cursor.execute(f"SELECT * FROM {tbl_name};")
-    return [col for col in de_tuple(r.description) if col != None and col != "key"]
+    return [col for col in de_tuple(r.description) if col is not None and col != "key"]
 
 
 def query(cursor: sqlite3.Cursor, qstring: str):
@@ -38,7 +38,19 @@ def query(cursor: sqlite3.Cursor, qstring: str):
     return r.fetchall()
 
 
-def map_cols2rows(cols: list[str], rows: list[tuple]) -> dict:
-    for row in rows:
-        d = dict(zip(row, cols))
-        print(d)
+def unique_sports(cursor: sqlite3.Cursor):
+    sports = de_tuple(
+        query(
+            cursor,
+            "SELECT name FROM sqlite_master WHERE type='table';"
+        )
+    )
+    for i, sport in enumerate(sports):
+        sports[i] = remove_nums(sport)
+        if sports[i][-1] == "_":
+            sports[i] = sports[i][:-1]
+    return {sport for sport in sports}
+
+
+def remove_nums(s: str):
+    return "".join([i for i in s if not i.isdigit()])
