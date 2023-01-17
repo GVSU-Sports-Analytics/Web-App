@@ -1,32 +1,23 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <link type="text/css" rel="stylesheet" href="{{ url_for("static", filename="styles.css") }}"/>
     <link type="image/x-icon" rel="icon" href="{{ url_for("static", filename="favicon.ico") }}">
-    <title>GVSU {{ sport }}-{{ player }}</title>
+    <title>GVSU-{{ sport_name }}-{{ player_name }}</title>
 </head>
-
 <body>
+
 <div>
     <nav class="topnav">
         <a href="/">Home</a>
-        <a href="/baseball">Baseball</a>
+        <a href="{{ url_for('sport.sport_page', sport_name='Baseball') }}">Baseball</a>
         <a href="https://gvsu.campuslabs.com/engage/organization/baseballanalytics">About</a>
         <a href="https://github.com/GVSU-Sports-Analytics">GitHub</a>
     </nav>
 </div>
 
 <div>
-    <h1 class="page-title">{{ player }}</h1>
-</div>
-
-<div>
-    <img src="{{ data["image"] }}" alt="{{ player }} image">
-    <ul>
-        <li>Number: {{ data["number"] }}</li>
-        <li>Pos: {{ data["pos"] }}</li>
-        <li>Height: {{ data["height"] }}</li>
-        <li>Weight: {{ data["weight"] }}</li>
-    </ul>
+    <h1 class="page-title">{{ player_name }}</h1>
 </div>
 
 </body>

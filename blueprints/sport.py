@@ -1,6 +1,6 @@
 from flask import render_template
 from framework.flask_blueprint import Page
-from db import query, table_names
+from db import query, table_names, de_tuple
 
 
 sport = Page(
@@ -17,11 +17,11 @@ def sport_page(sport_name) -> str:
         sport.Cursor,
         sport_name.lower(),
     )
-    tables = [tbl.split("_")[-1] for tbl in tables]
+    years = [tbl.split("_")[-1] for tbl in tables]
     return render_template(
         "sport.html",
         sport_name=sport_name,
-        data=tables,
+        data=years,
     )
 
 
@@ -29,7 +29,7 @@ def sport_page(sport_name) -> str:
 def year_page(sport_name, year) -> str:
     players = query(
         sport.Cursor,
-        f"""SELECT image FROM {sport_name.lower()}_{year};"""
+        f"""SELECT player_name, image FROM {sport_name.lower()}_{year};"""
     )
     return render_template(
         "year.html",

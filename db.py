@@ -5,7 +5,7 @@ def config_db():
     # while we are testing with the
     # sqlite3 db, you must have the Sidearm-Updater
     # repo installed alongside the Web-App in same dir
-    path = "/Users/jensen/Documents/projects/Sidearm-Updater/data/gvsac.db"
+    path = "/home/jensen/Documents/projects/gvsu-app/Sidearm-Updater/data/gvsac.db"
     return sqlite3.connect(
         path,
         check_same_thread=False,
@@ -30,7 +30,7 @@ def table_names(cursor: sqlite3.Cursor, filt: str) -> list[str]:
 
 def column_names(cursor: sqlite3.Cursor, tbl_name: str):
     r = cursor.execute(f"SELECT * FROM {tbl_name};")
-    return de_tuple(r.description)
+    return [col for col in de_tuple(r.description) if col != None and col != "key"]
 
 
 def query(cursor: sqlite3.Cursor, qstring: str):
@@ -39,4 +39,6 @@ def query(cursor: sqlite3.Cursor, qstring: str):
 
 
 def map_cols2rows(cols: list[str], rows: list[tuple]) -> dict:
-    return
+    for row in rows:
+        d = dict(zip(row, cols))
+        print(d)
