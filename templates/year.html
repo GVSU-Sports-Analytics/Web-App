@@ -19,5 +19,11 @@
     <h1 class="page-title">{{ year + " " + sport_name }}</h1>
 </div>
 
+<div>
+    {% for player in data %}
+        <h1>{{ player }}</h1>
+    {% endfor %}
+</div>
+
 </body>
 </html>

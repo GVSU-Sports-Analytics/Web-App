@@ -1,5 +1,6 @@
 from flask import render_template
 from framework.flask_blueprint import Page
+from db import query, table_names
 
 
 sport = Page(
@@ -12,24 +13,30 @@ sport = Page(
 
 @sport.View.route("/<sport_name>")
 def sport_page(sport_name) -> str:
-
-    tables = sport.Cursor.execute(f"""
-            SELECT name FROM sqlite_master WHERE type='table'; 
-    """)
-
+    tables = table_names(
+        sport.Cursor,
+        sport_name.lower(),
+    )
+    print(tables)
+    tables = [tbl.split("_")[-1] for tbl in tables]
     return render_template(
         "sport.html",
-        sport_name=f"GVSU {sport_name}",
+        sport_name=sport_name,
         data=tables,
     )
 
 
 @sport.View.route("/<sport_name>/<year>")
 def year_page(sport_name, year) -> str:
+    players = query(
+        sport.Cursor,
+        f"""SELECT * FROM {sport_name.lower()}__{year};"""
+    )
     return render_template(
         "year.html",
         sport_name=sport_name,
         year=year,
+        data=players,
     )
 
 
@@ -48,5 +55,5 @@ def player_year_page(sport_name, player_name, year) -> str:
         "player.html",
         sport_name=sport_name,
         player_name=player_name,
-        year=year
+        year=year,
     )
