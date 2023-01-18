@@ -1,6 +1,6 @@
 from flask import render_template
 from framework.page import Page
-from db import (
+from data.db import (
     query_cols,
     query,
     table_names,
