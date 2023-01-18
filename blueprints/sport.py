@@ -26,7 +26,7 @@ def sport_page(sport_name) -> str:
     )
 
 
-@sport.View.route("/<sport_name>/<year>")
+@sport.View.route("/year/<sport_name>/<year>")
 def year_page(sport_name, year) -> str:
     players = query(
         sport.Cursor,
@@ -42,18 +42,24 @@ def year_page(sport_name, year) -> str:
     )
 
 
-@sport.View.route("/gvsu/<sport_name>/<player_name>")
-def player_page(sport_name, player_name) -> str:
+@sport.View.route("/gvsu_player/<sport_name>/<player_name>/<year>")
+def player_page(sport_name, player_name, year) -> str:
+    # sports is only needed for the nav bar
     sports = unique_sports(sport.Cursor)
+    player_info = query(
+        sport.Cursor,
+        f"SELECT player_name, height, weight FROM {sport_name}_{year} WHERE player_name='{player_name}';"
+    )
     return render_template(
         "player.html",
         sport_name=sport_name,
         player_name=player_name,
-        sports=sports
+        sports=sports,
+        player_info=player_info
     )
 
 
-@sport.View.route("/<sport_name>/<player_name>/<year>")
+@sport.View.route("/gvsu_player_year/<sport_name>/<player_name>/<year>")
 def player_year_page(sport_name, player_name, year) -> str:
     sports = unique_sports(sport.Cursor)
     return render_template(
