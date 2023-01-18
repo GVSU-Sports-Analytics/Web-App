@@ -1,6 +1,11 @@
 from flask import render_template
 from framework.page import Page
-from db import query_cols, query, table_names, unique_sports
+from db import (
+    query_cols,
+    query,
+    table_names,
+    unique_sports
+)
 
 sport = Page(
     name="sport",
@@ -48,14 +53,14 @@ def player_page(sport_name, player_name, year) -> str:
     sports = unique_sports(sport.Cursor)
     player_info = query_cols(
         sport.Cursor,
-        f"SELECT player_name, height, weight FROM {sport_name}_{year} WHERE player_name='{player_name}';"
+        f"SELECT player_name, height, weight, pos FROM {sport_name}_{year} WHERE player_name='{player_name}';"
     )
     return render_template(
         "player.html",
         sport_name=sport_name,
         player_name=player_name,
+        player_info=player_info,
         sports=sports,
-        player_info=player_info
     )
 
 

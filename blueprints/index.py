@@ -1,6 +1,6 @@
 from flask import render_template
 from framework.page import Page
-from db import query, de_tuple, unique_sports
+from db import unique_sports
 
 index = Page(
     name="index",

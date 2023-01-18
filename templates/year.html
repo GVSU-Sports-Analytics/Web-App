@@ -25,7 +25,11 @@
 <div>
     {% for player in data %}
         <a href="{{ url_for('sport.player_page', sport_name=sport_name, player_name=player[0], year=year) }}">
-            <img src="{{ player[1] }}" alt="{{ player[0] }}">
+            {% if player[1] != "NA" %}
+                <img src="{{ player[1] }}" alt="{{ player[0] }}">
+            {% else %}
+                <img src="{{ url_for('static', filename='favicon.ico') }}" alt="{{ player[0] }}">
+            {% endif %}
         </a>
     {% endfor %}
 </div>
