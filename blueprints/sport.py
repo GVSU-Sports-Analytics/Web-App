@@ -1,7 +1,6 @@
 from flask import render_template
-from framework.flask_blueprint import Page
-from db import query, table_names, de_tuple, unique_sports
-
+from framework.page import Page
+from db import query, table_names, unique_sports
 
 sport = Page(
     name="sport",
@@ -43,7 +42,7 @@ def year_page(sport_name, year) -> str:
     )
 
 
-@sport.View.route("/<sport_name>/<player_name>")
+@sport.View.route("/gvsu/<sport_name>/<player_name>")
 def player_page(sport_name, player_name) -> str:
     sports = unique_sports(sport.Cursor)
     return render_template(

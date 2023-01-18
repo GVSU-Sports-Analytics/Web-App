@@ -1,8 +1,7 @@
 from blueprints.index import index
 from blueprints.sport import sport
-from framework.flask_app import App
+from framework.application import App
 from db import config_db
-
 
 if __name__ == "__main__":
     db = config_db()

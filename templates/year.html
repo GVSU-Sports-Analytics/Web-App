@@ -19,12 +19,14 @@
 </div>
 
 <div>
-    <h1 class="page-title">{{ year + " " + sport_name }}</h1>
+    <h1 class="page-title">{{ year + " " + sport_name.title() }}</h1>
 </div>
 
 <div>
     {% for player in data %}
-        <a href="{{ url_for('sport.player_page', sport_name=sport_name, player_name=player[0]) }}"><img src="{{ player[1] }}" alt=""></a>
+        <a href="{{ url_for('sport.player_page', sport_name=sport_name, player_name=player[0]) }}">
+            <img src="{{ player[1] }}" alt="{{ player[0] }}">
+        </a>
     {% endfor %}
 </div>
 

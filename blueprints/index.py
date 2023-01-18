@@ -1,5 +1,5 @@
 from flask import render_template
-from framework.flask_blueprint import Page
+from framework.page import Page
 from db import query, de_tuple, unique_sports
 
 index = Page(

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from framework.flask_blueprint import Page
+from framework.component import Component
+from framework.page import Page
 from flask import Flask
 import sqlite3
 
@@ -15,6 +16,10 @@ class App:
     _cursor: sqlite3.Cursor
 
     _pages: list[Page] = field(
+        default_factory=lambda: []
+    )
+
+    _components: list[Component] = field(
         default_factory=lambda: []
     )
 
@@ -38,10 +43,18 @@ class App:
         for bp in blueprints:
             self._pages.append(bp)
 
+    def add_components(self, *components: Component):
+        for cp in components:
+            self._components.append(cp)
+
     def config_blueprints(self, app: Flask):
         for page in self._pages:
             page.configure_database(self.Database)
             app.register_blueprint(page.View)
+
+    def config_components(self):
+        for cp in self._components:
+            cp.configure_database(self.Database)
 
     def run(self):
         app = Flask(
@@ -50,6 +63,7 @@ class App:
             template_folder=self.template_path
         )
 
+        self.config_components()
         self.config_blueprints(app)
 
         app.run(
