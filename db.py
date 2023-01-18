@@ -38,6 +38,15 @@ def query(cursor: sqlite3.Cursor, qstring: str):
     return r.fetchall()
 
 
+def query_cols(cursor: sqlite3.Cursor, qstring: str):
+    if "*" not in qstring:
+        columns = qstring[qstring.index("SELECT") + 6:qstring.index("FROM")].replace(" ", "").split(",")
+        r = de_tuple(cursor.execute(qstring).fetchall())
+        return dict(zip(columns, r))
+    r = cursor.execute(qstring).fetchall()
+    return r
+
+
 def unique_sports(cursor: sqlite3.Cursor):
     sports = de_tuple(
         query(

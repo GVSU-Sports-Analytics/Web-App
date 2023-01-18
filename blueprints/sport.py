@@ -1,6 +1,6 @@
 from flask import render_template
 from framework.page import Page
-from db import query, table_names, unique_sports
+from db import query_cols, query, table_names, unique_sports
 
 sport = Page(
     name="sport",
@@ -46,7 +46,7 @@ def year_page(sport_name, year) -> str:
 def player_page(sport_name, player_name, year) -> str:
     # sports is only needed for the nav bar
     sports = unique_sports(sport.Cursor)
-    player_info = query(
+    player_info = query_cols(
         sport.Cursor,
         f"SELECT player_name, height, weight FROM {sport_name}_{year} WHERE player_name='{player_name}';"
     )
