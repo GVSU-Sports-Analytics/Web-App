@@ -8,6 +8,7 @@ export default function HeaderImage() {
         alt="louie-bg"
         width={700}
         height={700}
+        className="w-full"
         >
         </Image>
     )
