@@ -1,7 +1,5 @@
 export default function NavItem(props) {
     return (
-        <li>
-            {props.props}
-        </li>
+        <li key={props.key}>{props.link}</li>
     )
 }
