@@ -1,32 +1,11 @@
 import NavItem from "./NavItem"
+import Link from 'next/link'
 
 
 const navContent = [
-
-    {
-        href: "/",
-        text: "Home",
-    },
-
-    {
-        href: "/baseball",
-        text: "Baseball",
-    },
-
-    {
-        href: "/softball",
-        text: "Softball"
-    },
-
-    {
-        href: "/",
-        text: "About",
-    },
-
-    {
-        href: "https://github.com",
-        text: "GitHub",
-    },
+    <Link href={"/"} className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Home</Link>,
+    <Link href={"/sports/baseball"} className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Baseball</Link>,
+    <Link href={"/sports/softball"} className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Softball</Link>,
 ]
 
 
